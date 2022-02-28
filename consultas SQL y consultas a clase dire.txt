@@ -1,0 +1,11 @@
+select * from ventas 
+
+select v.`idVenta`, v.fecha, u.nombre, u.apellidos from ventas v join usuarios u on u.idUsuario =v.cliente
+
+
+Todos los pedidos de un usuario:
+select u.nombre, count(v.`idVenta`)
+from ventas v right join usuarios u on v.cliente = u.`idUsuario`
+group by u.nombre
+
+Todos los pedidos de un usuario en JPQL
