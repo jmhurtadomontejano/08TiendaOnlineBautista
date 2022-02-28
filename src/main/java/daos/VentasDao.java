@@ -14,12 +14,14 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import utilidades.EntityManagerUtil;
 import Dto.Detalleventas;
-import Dto.DetalleventaPK;
+import Dto.DetalleventasPK;
 import Dto.Usuarios;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 /**
  *
@@ -36,8 +38,8 @@ public class VentasDao {
         //A partir de él, creamos el entitymanager
         this.em = emf.createEntityManager();
     }
-    
-    public int createVenta(Ventas v){
+
+    public int createVenta(Ventas v) {
         try {
             //Le decimos a la entitymanager que inicie la transacción
             em.getTransaction().begin();
@@ -48,13 +50,16 @@ public class VentasDao {
             //Le pedimos a la transacción que se ejecute y complete
             em.getTransaction().commit();
             return v.getIdVenta();
-        } catch(Exception e) {
-            System.out.println(e.getMessage());            
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
             return 0;
+        } finally {
+            //Cerramos la conexión
+            em.close();
         }
     }
-    
-    public void createDetalle(Detalleventas dv){
+
+    public void createDetalle(Detalleventas dv) {
         try {
             //Le decimos a la entitymanager que inicie la transacción
             em.getTransaction().begin();
@@ -62,8 +67,118 @@ public class VentasDao {
             em.persist(dv);
             //Le pedimos a la transacción que se ejecute y complete            
             em.getTransaction().commit();
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
+        } finally {
+            //Cerramos la conexión
+            em.close();
+        }
+    }
+
+    public List<Detalleventas> getDetalles(int id) {
+        try {
+            //Creamos un query para realizar la consulta que tenemos en la clase usuarios, y así darle un parametro.        
+            Query q = em.createNamedQuery("Detalleventas.findByCodigoventa");
+            //Le colocamos el parametro a esa consulta.
+            q.setParameter("codigoventa", id);
+            //Devolvemos el resultado
+            return (List<Detalleventas>) q.getResultList();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            //Si no existe retornamos null
+            return null;
+        } finally {
+            //Cerramos la conexión            
+            em.close();
+        }
+    }
+
+    public List<Ventas> getVentas(int idUser) {
+        try {
+            //Creamos un query para realizar la consulta que tenemos en la clase usuarios, y así darle un parametro.        
+            Query q = em.createNamedQuery("Ventas.findByUser");
+            //Le colocamos el parametro a esa consulta.
+            q.setParameter("cliente", idUser);
+            //Devolvemos el resultado
+            return (List<Ventas>) q.getResultList();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            //Si no existe retornamos null
+            return null;
+        } finally {
+            //Cerramos la conexión            
+            em.close();
+        }
+    }
+
+    public Ventas getVentasId(int idVenta) {
+        try {
+            //Creamos un query para realizar la consulta que tenemos en la clase usuarios, y así darle un parametro.        
+            Query q = em.createNamedQuery("Ventas.findByIdVenta");
+            //Le colocamos el parametro a esa consulta.
+            q.setParameter("idVenta", idVenta);
+            //Devolvemos el resultado
+            return (Ventas) q.getSingleResult();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            //Si no existe retornamos null
+            return null;
+        } finally {
+            //Cerramos la conexión            
+            em.close();
+        }
+    }
+
+    //Obtener las ventas listadas de la última a la primera    
+    public List<Ventas> getVentas() {
+        try {
+            //Creamos un query a través de la entitymanager, de la clase Productos
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+            //Realizamos un root de Productos para realizar el ordenamiento.
+            Root<Ventas> r = cq.from(Ventas.class);
+            //Ordenamos al criteria query que realice el select
+            cq.select(r);
+            //Realizamos el ordenamiento con el select.
+            cq.orderBy(em.getCriteriaBuilder().desc(r.get("fecha")));
+            //Creamos el query através del criteria
+            Query q = em.createQuery(cq);
+            //Devolvemos el resultado
+            return q.getResultList();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
+
+    public void updateVentas(Ventas v) {
+        try {
+            //Iniciamos el proceso de transacción
+            em.getTransaction().begin();
+            //Realizamos la actualización
+            em.merge(v);
+            //Guardamos cambios
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
+    public List<Ventas> getVentasFechas(Date inicio, Date hasta) {
+        try {
+            //Creamos un query para realizar la consulta que tenemos en la clase usuarios, y así darle un parametro.        
+            Query q = em.createNamedQuery("Ventas.findByFechas");
+            //Le colocamos el parametro a esa consulta.
+            q.setParameter("inicio", inicio);
+            q.setParameter("final", hasta);
+            //Devolvemos el resultado
+            return (List<Ventas>) q.getResultList();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            //Si no existe retornamos null
+            return null;
+        } finally {
+            //Cerramos la conexión            
+            em.close();
         }
     }
 

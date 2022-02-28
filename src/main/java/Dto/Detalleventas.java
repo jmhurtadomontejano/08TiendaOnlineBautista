@@ -27,17 +27,17 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "detalleventas")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Detalleventa.findAll", query = "SELECT d FROM Detalleventa d"),
-    @NamedQuery(name = "Detalleventa.findByCodigoventa", query = "SELECT d FROM Detalleventa d WHERE d.detalleventaPK.codigoventa = :codigoventa"),
-    @NamedQuery(name = "Detalleventa.findByCodigoproducto", query = "SELECT d FROM Detalleventa d WHERE d.detalleventaPK.codigoproducto = :codigoproducto"),
-    @NamedQuery(name = "Detalleventa.findByPvp", query = "SELECT d FROM Detalleventa d WHERE d.pvp = :pvp"),
-    @NamedQuery(name = "Detalleventa.findByCantidad", query = "SELECT d FROM Detalleventa d WHERE d.cantidad = :cantidad"),
-    @NamedQuery(name = "Detalleventa.findByPctDescuento", query = "SELECT d FROM Detalleventa d WHERE d.pctDescuento = :pctDescuento")})
+    @NamedQuery(name = "Detalleventas.findAll", query = "SELECT d FROM Detalleventas d"),
+    @NamedQuery(name = "Detalleventas.findByCodigoventa", query = "SELECT d FROM Detalleventas d WHERE d.detalleventasPK.codigoventa = :codigoventa"),
+    @NamedQuery(name = "Detalleventas.findByCodigoproducto", query = "SELECT d FROM Detalleventas d WHERE d.detalleventasPK.codigoproducto = :codigoproducto"),
+    @NamedQuery(name = "Detalleventas.findByPvp", query = "SELECT d FROM Detalleventas d WHERE d.pvp = :pvp"),
+    @NamedQuery(name = "Detalleventas.findByCantidad", query = "SELECT d FROM Detalleventas d WHERE d.cantidad = :cantidad"),
+    @NamedQuery(name = "Detalleventas.findByPctDescuento", query = "SELECT d FROM Detalleventas d WHERE d.pctDescuento = :pctDescuento")})
 public class Detalleventas implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @EmbeddedId
-    protected DetalleventaPK detalleventaPK;
+    protected DetalleventasPK detalleventasPK;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Basic(optional = false)
     @NotNull
@@ -51,34 +51,34 @@ public class Detalleventas implements Serializable {
     private BigDecimal pctDescuento;
     @JoinColumn(name = "codigoproducto", referencedColumnName = "idProducto", insertable = false, updatable = false)
     @ManyToOne(optional = false)
-    private Productos producto;
+    private Productos productos;
     @JoinColumn(name = "codigoventa", referencedColumnName = "idVenta", insertable = false, updatable = false)
     @ManyToOne(optional = false)
-    private Ventas venta;
+    private Ventas ventas;
 
     public Detalleventas() {
     }
 
-    public Detalleventas(DetalleventaPK detalleventaPK) {
-        this.detalleventaPK = detalleventaPK;
+    public Detalleventas(DetalleventasPK detalleventasPK) {
+        this.detalleventasPK = detalleventasPK;
     }
 
-    public Detalleventas(DetalleventaPK detalleventaPK, BigDecimal pvp, int cantidad) {
-        this.detalleventaPK = detalleventaPK;
+    public Detalleventas(DetalleventasPK detalleventasPK, BigDecimal pvp, int cantidad) {
+        this.detalleventasPK = detalleventasPK;
         this.pvp = pvp;
         this.cantidad = cantidad;
     }
 
     public Detalleventas(int codigoventa, int codigoproducto) {
-        this.detalleventaPK = new DetalleventaPK(codigoventa, codigoproducto);
+        this.detalleventasPK = new DetalleventasPK(codigoventa, codigoproducto);
     }
 
-    public DetalleventaPK getDetalleventaPK() {
-        return detalleventaPK;
+    public DetalleventasPK getDetalleventasPK() {
+        return detalleventasPK;
     }
 
-    public void setDetalleventaPK(DetalleventaPK detalleventaPK) {
-        this.detalleventaPK = detalleventaPK;
+    public void setDetalleventasPK(DetalleventasPK detalleventasPK) {
+        this.detalleventasPK = detalleventasPK;
     }
 
     public BigDecimal getPvp() {
@@ -105,26 +105,26 @@ public class Detalleventas implements Serializable {
         this.pctDescuento = pctDescuento;
     }
 
-    public Productos getProducto() {
-        return producto;
+    public Productos getProductos() {
+        return productos;
     }
 
-    public void setProducto(Productos producto) {
-        this.producto = producto;
+    public void setProductos(Productos productos) {
+        this.productos = productos;
     }
 
-    public Ventas getVenta() {
-        return venta;
+    public Ventas getVentas() {
+        return ventas;
     }
 
-    public void setVenta(Ventas venta) {
-        this.venta = venta;
+    public void setVentas(Ventas ventas) {
+        this.ventas = ventas;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (detalleventaPK != null ? detalleventaPK.hashCode() : 0);
+        hash += (detalleventasPK != null ? detalleventasPK.hashCode() : 0);
         return hash;
     }
 
@@ -135,7 +135,7 @@ public class Detalleventas implements Serializable {
             return false;
         }
         Detalleventas other = (Detalleventas) object;
-        if ((this.detalleventaPK == null && other.detalleventaPK != null) || (this.detalleventaPK != null && !this.detalleventaPK.equals(other.detalleventaPK))) {
+        if ((this.detalleventasPK == null && other.detalleventasPK != null) || (this.detalleventasPK != null && !this.detalleventasPK.equals(other.detalleventasPK))) {
             return false;
         }
         return true;
@@ -143,9 +143,7 @@ public class Detalleventas implements Serializable {
 
     @Override
     public String toString() {
-        return "Detalleventa{" + "detalleventaPK=" + detalleventaPK + ", pvp=" + pvp + ", cantidad=" + cantidad + ", pctDescuento=" + pctDescuento + ", producto=" + producto + ", venta=" + venta + '}';
+        return "Dto.Detalleventas[ detalleventasPK=" + detalleventasPK + " ]";
     }
-
-
     
 }

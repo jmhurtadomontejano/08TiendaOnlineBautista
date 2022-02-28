@@ -79,10 +79,15 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 }
 
 #count-carrito{
-    color: orange;
+    color: violet;
 }
 
 .product_item{
     transition: all .4s;
     
+}
+
+.btn-primary{
+    background-color: purple;
+    border:2px solid black;
 }

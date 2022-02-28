@@ -7,7 +7,7 @@ package pruebas;
 
 import daos.VentasDao;
 import Dto.Detalleventas;
-import Dto.DetalleventaPK;
+import Dto.DetalleventasPK;
 import Dto.Usuarios;
 import Dto.Ventas;
 import java.math.BigDecimal;
@@ -43,7 +43,7 @@ public class PruebasGlobalesVentas {
         System.out.println("2. AÑADIR UN DETALLE DE VENTA: ");
         /*Creamos el objeto que contiene sus llaves primarias*/
         int idProducto = 11;
-        DetalleventaPK dvpk = new DetalleventaPK(idVenta, idProducto);
+        DetalleventasPK dvpk = new DetalleventasPK(idVenta, idProducto);
         //Cantidad del producto a llevar
         int cantidad = 10;
         //Precio del producto, utilizamos prodDao para buscar el producto en la BD y obtener su precio
@@ -89,7 +89,7 @@ public class PruebasGlobalesVentas {
         List<Detalleventas> detalleVentaLista = new ArrayList();
         //DETALLE VENTA 1
         Detalleventas dv1 = new Detalleventas();
-        dv1.setDetalleventaPK(new DetalleventaPK(idVentaInsertar, 6));
+    //    dv1.setDetalleventaPK(new DetalleventasPK(idVentaInsertar, 6));
         dv1.setCantidad(1);
         dv1.setPvp(new BigDecimal(2.7));
         dv1.setPctDescuento(BigDecimal.ZERO);
@@ -98,14 +98,14 @@ public class PruebasGlobalesVentas {
 
         //DETALLE VENTA 2
         Detalleventas dv2 = new Detalleventas();
-        dv2.setDetalleventaPK(new DetalleventaPK(idVentaInsertar, 7));
+   //     dv2.setDetalleventaPK(new DetalleventasPK(idVentaInsertar, 7));
         dv2.setCantidad(1);
         dv2.setPvp(new BigDecimal(4.6));
         dv1.setPctDescuento(BigDecimal.ZERO);
         detalleVentaLista.add(dv2);
 
         //añado los detalles a la nuevaVenta
-        nuevaVenta.setDetalleventaList(detalleVentaLista);
+  //      nuevaVenta.setDetalleventaList(detalleVentaLista);
 /*        if (ventDao.consultarVenta(idVentaInsertar) == null) {
             em.persist(nuevaVenta);
             em.getTransaction().commit();

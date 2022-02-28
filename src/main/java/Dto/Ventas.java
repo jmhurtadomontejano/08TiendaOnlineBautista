@@ -13,6 +13,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -23,6 +25,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -34,22 +37,30 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "ventas")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Venta.findAll", query = "SELECT v FROM Venta v"),
-    @NamedQuery(name = "Venta.findByIdVenta", query = "SELECT v FROM Venta v WHERE v.idVenta = :idVenta"),
-    @NamedQuery(name = "Venta.findByFecha", query = "SELECT v FROM Venta v WHERE v.fecha = :fecha")})
+    @NamedQuery(name = "Ventas.findAll", query = "SELECT v FROM Ventas v"),
+    @NamedQuery(name = "Ventas.findByIdVenta", query = "SELECT v FROM Ventas v WHERE v.idVenta = :idVenta"),
+    @NamedQuery(name = "Ventas.findByFecha", query = "SELECT v FROM Ventas v WHERE v.fecha = :fecha"),
+    @NamedQuery(name = "Ventas.findByEstado", query = "SELECT v FROM Ventas v WHERE v.estado = :estado")
+})
 public class Ventas implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
     @Column(name = "idVenta")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer idVenta;
     @Column(name = "fecha")
     @Temporal(TemporalType.DATE)
     private Date fecha;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "venta")
-    private List<Detalleventas> detalleventaList;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 20)
+    @Column(name = "estado")
+    private String estado;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ventas")
+    private List<Detalleventas> detalleventasList;
     @JoinColumn(name = "cliente", referencedColumnName = "idUsuario")
     @ManyToOne(optional = false)
     private Usuarios cliente;
@@ -61,19 +72,12 @@ public class Ventas implements Serializable {
         this.idVenta = idVenta;
     }
 
-        public Ventas(Integer idVenta, Date fecha, Usuarios cliente) {
+    public Ventas(Integer idVenta, String estado, Date fecha, Usuarios cliente) {
         this.idVenta = idVenta;
+        this.estado = estado;
         this.fecha = fecha;
         this.cliente = cliente;
     }
-    
-    public Ventas(Integer idVenta, Date fecha, List<Detalleventas> detalleventaList, Usuarios cliente) {
-        this.idVenta = idVenta;
-        this.fecha = fecha;
-        this.detalleventaList = detalleventaList;
-        this.cliente = cliente;
-    }
-
 
     public Integer getIdVenta() {
         return idVenta;
@@ -91,13 +95,21 @@ public class Ventas implements Serializable {
         this.fecha = fecha;
     }
 
-    @XmlTransient
-    public List<Detalleventas> getDetalleventaList() {
-        return detalleventaList;
+    public String getEstado() {
+        return estado;
     }
 
-    public void setDetalleventaList(List<Detalleventas> detalleventaList) {
-        this.detalleventaList = detalleventaList;
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    @XmlTransient
+    public List<Detalleventas> getDetalleventasList() {
+        return detalleventasList;
+    }
+
+    public void setDetalleventasList(List<Detalleventas> detalleventasList) {
+        this.detalleventasList = detalleventasList;
     }
 
     public Usuarios getCliente() {
@@ -130,9 +142,7 @@ public class Ventas implements Serializable {
 
     @Override
     public String toString() {
-        return "Venta{" + "idVenta=" + idVenta + ", fecha=" + fecha + ", detalleventaList=" + detalleventaList + ", cliente=" + cliente + '}';
+        return "Dto.Ventas[ idVenta=" + idVenta + " ]";
     }
-
-
     
 }

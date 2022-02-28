@@ -30,6 +30,19 @@ public class ProductosDao {
         this.em = emf.createEntityManager();
     }
 
+    public void createProduct(Productos p) {
+        try {
+            //Le decimos a la entitymanager que inicie la transacción
+            em.getTransaction().begin();
+            //Le decimos que inserte un objeto (Usuarios)
+            em.persist(p);
+            //Le pedimos a la transacción que se ejecute y complete
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
     public List<Productos> getProductos() {
         try {
             //Creamos un query a través de la entitymanager
@@ -64,6 +77,7 @@ public class ProductosDao {
             em.close();            
         }
     }
+
    //Método para obtener los productos ordenados por el precio menor
     public List<Productos> getProductosLow(){
         try {
@@ -105,4 +119,37 @@ public class ProductosDao {
             em.close();
         }
     }
+
+    public void updateProduct(Productos p) {
+        try {
+            //Iniciamos el proceso de transacción
+            em.getTransaction().begin();
+            //Realizamos la actualización
+            em.merge(p);
+            //Guardamos cambios
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
+    public void delete(int id) {
+        try {
+            //Creamos una entidad producto
+            Productos producto;
+            //Iniciamos el proceso de transacción
+            em.getTransaction().begin();
+            //Buscamos el objeto en la base de datos
+            producto = em.getReference(Productos.class, id);
+            //Eliminamos el objeto a través de la consulta remove
+            em.remove(producto);
+            //Guardamos cambios
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
+
+
 }

@@ -1,0 +1,93 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 21-feb-2022, 10:28:14
+    Author     : jmhur
+*/
+
+.card-price{
+    color: #337ab7;
+    font-weight: bold;
+}
+
+.banner{
+    position: relative;
+    width: 100%;
+    height: calc(100vh - 56px);
+    background-color: #F5F5F5;
+    background-size: cover;
+    background-position: center;
+    transition: all .1s ease-in-out;
+    background-image: url('../img/fondo.jpg');
+}
+
+.banner-content{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    color: #FFF;
+    background-color: rgba(0,22,40,.4);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.banner-content h1{
+    margin:0;
+    padding: 0;
+    padding-bottom: 10px;
+    font-size: 40px;
+    text-align: center;
+}
+
+.banner-content h4{
+    margin:0;
+    padding: 0;
+    padding-bottom: 30px;
+    text-align: center;
+}
+
+.banner-content a{
+    text-decoration: none;
+    color: #FFF;
+    padding: 9px 20px;
+    border: 1px solid #FFF;
+    text-transform: uppercase;
+    transition: all .3s ease-in-out;
+}
+
+.banner-content a:hover{
+    background-color: #FFF;
+    color: #333;
+}
+
+.container{
+    padding-top: 20px;
+}
+
+.list-item{
+    padding-bottom: 10px;
+}
+
+.text-red{
+    color: red;
+    text-transform: uppercase;
+}
+
+#count-carrito{
+    color: violet;
+}
+
+.product_item{
+    transition: all .4s;
+    
+}
+
+.btn-primary{
+    background-color: purple;
+    border:2px solid black;
+}

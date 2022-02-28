@@ -8,7 +8,7 @@ package pruebas;
 import Dto.Ventas;
 import daos.VentasDao;
 import Dto.Detalleventas;
-import Dto.DetalleventaPK;
+import Dto.DetalleventasPK;
 import Dto.Usuarios;
 import java.math.BigDecimal;
 import java.text.DateFormat;
@@ -59,7 +59,7 @@ public class PruebaVentasBackup {
 
         //DETALLE VENTA 1
         Detalleventas dv1 = new Detalleventas();
-        dv1.setDetalleventaPK(new DetalleventaPK(idVentaNueva, 4));
+     //   dv1.setDetalleventaPK(new DetalleventasPK(idVentaNueva, 4));
    /*     dv1.setCantidad(1);
         dv1.setPvp(new BigDecimal(2.7));
         dv1.setPctDescuento(BigDecimal.ZERO);
@@ -68,7 +68,7 @@ public class PruebaVentasBackup {
 */
         //DETALLE VENTA 2
         Detalleventas dv2 = new Detalleventas();
-        dv2.setDetalleventaPK(new DetalleventaPK(idVentaNueva, 5));
+     //   dv2.setDetalleventaPK(new DetalleventasPK(idVentaNueva, 5));
         dv2.setCantidad(1);
         dv2.setPvp(new BigDecimal(4.6));
         dv1.setPctDescuento(BigDecimal.ZERO);
@@ -99,7 +99,7 @@ public class PruebaVentasBackup {
      /*Modificar una venta*/
         int idVentaModificar = 41;
         System.out.println("MODIFICAR LA VENTA con ID: " + idVentaModificar);
-        Ventas updateVenta = new Ventas(idVentaModificar, fecha, cliente);
+ //       Ventas updateVenta = new Ventas(idVentaModificar, fecha, cliente);
   //      ventDao.editarVenta(updateVenta);
 
         /*borrar ventapor ID*/

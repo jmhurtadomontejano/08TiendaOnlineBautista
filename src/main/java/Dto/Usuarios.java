@@ -31,14 +31,14 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "usuarios")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u"),
-    @NamedQuery(name = "Usuario.findByIdUsuario", query = "SELECT u FROM Usuario u WHERE u.idUsuario = :idUsuario"),
-    @NamedQuery(name = "Usuario.findByApellidos", query = "SELECT u FROM Usuario u WHERE u.apellidos = :apellidos"),
-    @NamedQuery(name = "Usuario.findByNombre", query = "SELECT u FROM Usuario u WHERE u.nombre = :nombre"),
-    @NamedQuery(name = "Usuario.findByLocalidad", query = "SELECT u FROM Usuario u WHERE u.localidad = :localidad"),
-    @NamedQuery(name = "Usuario.findByPerfil", query = "SELECT u FROM Usuario u WHERE u.perfil = :perfil"),
-    @NamedQuery(name = "Usuario.findByCorreo", query = "SELECT u FROM Usuario u WHERE u.correo = :correo"),
-    @NamedQuery(name = "Usuario.findByClaveusu", query = "SELECT u FROM Usuario u WHERE u.claveusu = :claveusu")})
+    @NamedQuery(name = "Usuarios.findAll", query = "SELECT u FROM Usuarios u"),
+    @NamedQuery(name = "Usuarios.findByIdUsuario", query = "SELECT u FROM Usuarios u WHERE u.idUsuario = :idUsuario"),
+    @NamedQuery(name = "Usuarios.findByApellidos", query = "SELECT u FROM Usuarios u WHERE u.apellidos = :apellidos"),
+    @NamedQuery(name = "Usuarios.findByNombre", query = "SELECT u FROM Usuarios u WHERE u.nombre = :nombre"),
+    @NamedQuery(name = "Usuarios.findByLocalidad", query = "SELECT u FROM Usuarios u WHERE u.localidad = :localidad"),
+    @NamedQuery(name = "Usuarios.findByPerfil", query = "SELECT u FROM Usuarios u WHERE u.perfil = :perfil"),
+    @NamedQuery(name = "Usuarios.findByCorreo", query = "SELECT u FROM Usuarios u WHERE u.correo = :correo"),
+    @NamedQuery(name = "Usuarios.findByClaveusu", query = "SELECT u FROM Usuarios u WHERE u.claveusu = :claveusu")})
 public class Usuarios implements Serializable {
 
     private static final long serialVersionUID = 1L;

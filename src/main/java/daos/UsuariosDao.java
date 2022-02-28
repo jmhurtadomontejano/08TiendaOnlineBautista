@@ -20,164 +20,61 @@ import utilidades.EntityManagerUtil;
  *
  * @author jmhur
  */
-public class UsuariosDao implements UsuarioDAO {
+public class UsuariosDao {
 
-    String up = "unidad1";
-
-    public UsuariosDao(String up) {
-        this.up = "unidad1";
-    }
+    private EntityManagerFactory emf;
+    private EntityManager em;
 
     public UsuariosDao() {
-
+        //Creamos el entitymanagerfactory
+        this.emf = Persistence.createEntityManagerFactory("unidad1");
+        //A partir de él, creamos el entitymanager
+        this.em = emf.createEntityManager();
     }
 
-    @Override
-    public boolean insertar(Usuarios u) {
-        boolean isInsertado = false;
+    public Usuarios getUsuarioEmail(String email) {
         try {
-            EntityManager em = EntityManagerUtil.getEM(up);
-            em.getTransaction().begin();
-            if (em.find(Usuarios.class, u.getIdUsuario()) == null) {
-                em.persist(u);
-                isInsertado = true;
-            }
-            em.getTransaction().commit();
-        } catch (Exception ex) {
-            ex.getMessage();
-        }
-        return isInsertado;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public List<Usuarios> buscarTodos() {
-        EntityManager em = utilidades.EntityManagerUtil.getEM(up);
-        String jpql = "select u from Usuario u";
-        Query q = em.createQuery(jpql);
-        List<Usuarios> lista = q.getResultList();
-        return lista;
-    }
-
-       @Override
-    public Usuarios buscarPorId(int id) {
-        Usuarios usu = null;
-        try {
-            EntityManager em = utilidades.EntityManagerUtil.getEM(up);
-            String jpql = "from Usuario u where u.idUsuario = :pid";
-            Query q = em.createQuery(jpql);
-            q.setParameter("pid", id);
-            usu = (Usuarios) q.getSingleResult();
-        } catch (Exception ex) {
-            ex.getMessage();
-        } finally {
-            return usu;
+            //Creamos un query para realizar la consulta que tenemos en la clase usuarios, y así darle un parametro.        
+            Query q = em.createNamedQuery("Usuarios.findByCorreo");
+            //Le colocamos el parametro a esa consulta.
+            q.setParameter("correo", email);
+            //Devolvemos el resultado
+            return (Usuarios) q.getSingleResult();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return null;
+        }finally{
+            em.close();            
         }
     }
-
-    @Override
-    public Usuarios buscarPorNombre(String nombre) {
-        Usuarios usu = null;
-        try {
-            EntityManager em = utilidades.EntityManagerUtil.getEM(up);
-            String jpql = "from Usuario u where u.nombre = :pnombre";
-            Query q = em.createQuery(jpql);
-            q.setParameter("pnombre", nombre);
-            usu = (Usuarios) q.getSingleResult();
-        } catch (Exception ex) {
-            ex.getMessage();
-        } finally {
-            return usu;
-        }
-    }
-
-    @Override
-    public Usuarios buscarPorEmail(String email) {
-        Usuarios usu = null;
-        try {
-            EntityManager em = utilidades.EntityManagerUtil.getEM(up);
-            String jpql = "from Usuario u where u.correo = :pemail";
-            Query q = em.createQuery(jpql);
-            q.setParameter("pemail", email);
-            usu = (Usuarios) q.getSingleResult();
-        } catch (Exception ex) {
-            ex.getMessage();
-        } finally {
-            return usu;
-        }
-    }
-
-    @Override
-    public boolean editar(int id) {
-        boolean isEdit = false;
-        try {
-            EntityManager em = utilidades.EntityManagerUtil.getEM(up);
-            em.getTransaction().begin();
-            em.merge(id);
-            em.getTransaction().commit();
-            em.close();
-        } catch (Exception ex) {
-            ex.getMessage();
-        }
-        return isEdit;
-    }
-
-    @Override
-    public boolean editar(Usuarios u) {
-        boolean isEdit = false;
-        try {
-            EntityManager em = utilidades.EntityManagerUtil.getEM(up);
-            em.getTransaction().begin();
-            em.merge(u);
-            em.getTransaction().commit();
-            em.close();
-        } catch (Exception ex) {
-            ex.getMessage();
-        }
-        return isEdit;
-    }
-
-
     
-     @Override
-    public boolean eliminar(int id) {
-        boolean isEliminado = false;
+    public Usuarios getUsuarioId(int id){
         try {
-            EntityManager em = EntityManagerUtil.getEM(up);
-            em.getTransaction().begin();
-
-            Usuarios uBorrar = em.find(Usuarios.class, id);
-            if (uBorrar != null) {
-                em.remove(uBorrar);
-                isEliminado = true;
-            }
-            em.getTransaction().commit();
-        } catch (Exception ex) {
-            ex.getMessage();
+            //Creamos un query para realizar la consulta que tenemos en la clase usuarios, y así darle un parametro.        
+            Query q = em.createNamedQuery("Usuarios.findByIdUsuario");
+            //Le colocamos el parametro a esa consulta.
+            q.setParameter("idUsuario", id);
+            //Devolvemos el resultado
+            return (Usuarios) q.getSingleResult();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return null;
+        }finally{
+            em.close();
         }
-        return isEliminado;
     }
 
-    @Override
-public boolean eliminar(Usuarios u) {
-        boolean isEliminado = false;
+    public void insertarUsuario(Usuarios u) {
         try {
-            EntityManager em = EntityManagerUtil.getEM(up);
+            //Le decimos a la entitymanager que inicie la transacción
             em.getTransaction().begin();
-            
-            Usuarios uBorrar = em.find(Usuarios.class, u.getIdUsuario());
-            if (uBorrar != null) {
-                u = em.merge(uBorrar);
-                em.remove(u);
-                isEliminado = true;
-            }
+            //Le decimos que inserte un objeto (Usuarios)
+            em.persist(u);
+            //Le pedimos a la transacción que se ejecute y complete
             em.getTransaction().commit();
-        } catch (Exception ex) {
-            ex.getMessage();
+        } finally {
+            //Cerramos la conexión
+            em.close();
         }
-        return isEliminado;
     }
 }
