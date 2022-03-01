@@ -10,12 +10,12 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>JuanMi Store</title>
     </head>
     <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">Juan Store</a>
+                <a class="navbar-brand" href="#">JuanMi Store</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -39,8 +39,11 @@
                                             0
                                         </c:otherwise>
                                     </c:choose>
-                                </label>) <i class="fas fa-shopping-cart"></i></a>
+                                </label>) 
+                             <!-- imagen carrito-->
+                           <i class="fas fa-shopping-cart"></i></a>
                         </li>
+                        <!-- Compruebamos si el rol del sessionScope es Admin para mostrar las siguientes opciones -->
                         <c:if test="${sessionScope.role == 'Admin'}">
                             <li class="nav-item">
                                 <a class="nav-link" href="Controller?accion=administrar">Administrar Productos</a>

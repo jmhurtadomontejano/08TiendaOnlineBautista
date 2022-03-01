@@ -6,13 +6,10 @@
 package daos;
 
 import Dto.Categorias;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-import utilidades.EntityManagerUtil;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.criteria.CriteriaQuery;
@@ -33,6 +30,19 @@ public class CategoriasDao {
         this.em = emf.createEntityManager();
     }
     
+    public void createCategoria(Categorias c) {
+        try {
+            //Le decimos a la entitymanager que inicie la transacción
+            em.getTransaction().begin();
+            //Le decimos que inserte un objeto (Usuarios)
+            em.persist(c);
+            //Le pedimos a la transacción que se ejecute y complete
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
     public List<Categorias> getCategorias() {
         try {
             //Creamos un query a través de la entitymanager
@@ -46,6 +56,22 @@ public class CategoriasDao {
             return q.getResultList();
         } finally {
             //Cerramos la conexión            
+            em.close();
+        }
+    }
+ public Categorias getCategoryName(String name){
+        try {
+            //Creamos un query para realizar la consulta que tenemos en la clase usuarios, y así darle un parametro.        
+            Query q = em.createNamedQuery("Categorias.findByNombre");
+            //Le colocamos el parametro a esa consulta.
+            q.setParameter("nombre", name);
+            //Devolvemos el resultado
+            return (Categorias) q.getSingleResult();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            //Si no existe retornamos null
+            return null;
+        } finally {
             em.close();
         }
     }

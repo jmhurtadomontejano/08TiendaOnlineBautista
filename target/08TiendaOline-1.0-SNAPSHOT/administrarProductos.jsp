@@ -4,22 +4,23 @@
     Author     : jmhur
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
+        <title>Juan Store | Administraci髇</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Administrar Productos</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+        <link rel="stylesheet" href="css/styles.css"/>
     </head>
     <body>
-        <!-- Verificamos si tiene una sesi贸n activa -->
+        <!-- Verificamos si tiene una sesi髇 activa -->
         <c:if test="${sessionScope.name == null}">
             <c:redirect url="index.jsp"></c:redirect>
         </c:if>
-        <!-- Mostramos barra de Menu Navegaci贸n -->
-        <c:import url="navbar.jsp"></c:import>
-    <div class="container">
+           <c:import url="navbar.jsp"></c:import>
+        <div class="container">
             <div class="row justify-content-between">
                 <div class="col">
                     <h2>Listado de productos</h2>
@@ -77,7 +78,7 @@
                     </div>
                     <div class="modal-body">                        
                         <div class="tab-content" id="pills-tabContent">
-                            <!-- Formulario inicio de sesi贸n -->
+                            <!-- Formulario inicio de sesi髇 -->
                             <form class="row g-3" onsubmit="return false;" id="formProducto" enctype="multipart/form-data" method="post">
                                 <input name="accion" type="hidden" id="accion">
                                 <div class="col-6">
@@ -97,8 +98,8 @@
                                 <div class="col-6">
                                     <div class="form-floating">
                                         <input type="text" class="form-control" name="floatingDesc" id="floatingDesc"
-                                               placeholder="Del a帽o 2010" required>
-                                        <label for="floatingDesc">Descripci贸n</label>
+                                               placeholder="Del a駉 2010" required>
+                                        <label for="floatingDesc">Descripci髇</label>
                                     </div>
                                 </div>
                                 <div class="col-6">

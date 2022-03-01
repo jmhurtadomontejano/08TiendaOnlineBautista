@@ -39,17 +39,19 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Ventas.findAll", query = "SELECT v FROM Ventas v"),
     @NamedQuery(name = "Ventas.findByIdVenta", query = "SELECT v FROM Ventas v WHERE v.idVenta = :idVenta"),
+    @NamedQuery(name = "Ventas.findByFechas", query = "SELECT v FROM Ventas v WHERE v.fecha BETWEEN :inicio AND :final ORDER BY v.fecha DESC"),
     @NamedQuery(name = "Ventas.findByFecha", query = "SELECT v FROM Ventas v WHERE v.fecha = :fecha"),
-    @NamedQuery(name = "Ventas.findByEstado", query = "SELECT v FROM Ventas v WHERE v.estado = :estado")
+    @NamedQuery(name = "Ventas.findByEstado", query = "SELECT v FROM Ventas v WHERE v.estado = :estado"),
+    @NamedQuery(name = "Ventas.findByUser", query = "SELECT v FROM Ventas v WHERE v.cliente.idUsuario = :cliente ORDER BY v.fecha DESC")
 })
 public class Ventas implements Serializable {
 
-     private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
     @Column(name = "idVenta")
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idVenta;
     @Column(name = "fecha")
     @Temporal(TemporalType.DATE)
@@ -59,8 +61,6 @@ public class Ventas implements Serializable {
     @Size(min = 1, max = 20)
     @Column(name = "estado")
     private String estado;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ventas")
-    private List<Detalleventas> detalleventasList;
     @JoinColumn(name = "cliente", referencedColumnName = "idUsuario")
     @ManyToOne(optional = false)
     private Usuarios cliente;
@@ -103,15 +103,6 @@ public class Ventas implements Serializable {
         this.estado = estado;
     }
 
-    @XmlTransient
-    public List<Detalleventas> getDetalleventasList() {
-        return detalleventasList;
-    }
-
-    public void setDetalleventasList(List<Detalleventas> detalleventasList) {
-        this.detalleventasList = detalleventasList;
-    }
-
     public Usuarios getCliente() {
         return cliente;
     }
@@ -144,5 +135,5 @@ public class Ventas implements Serializable {
     public String toString() {
         return "Dto.Ventas[ idVenta=" + idVenta + " ]";
     }
-    
+
 }

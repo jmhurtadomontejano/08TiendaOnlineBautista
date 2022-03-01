@@ -15,16 +15,17 @@
         <link rel="stylesheet" href="css/styles.css"/>
     </head>
     <body>
-                <c:import url="navbar.jsp"></c:import>
-        <div class="container">
-            <div class="row g-4 list-item">
-                <div class="col-3">
-                    <div class="btn-group dropend mb-2">
-                        <button type="button" id="btn-filtrar" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                            Filtrar por: Todo
-                        </button>
-                        <ul class="dropdown-menu category_list">
-                            <li><a href="#" class="dropdown-item category_item" category="Todo">Todo</a></li>
+        <c:import url="navbar.jsp"></c:import>
+
+            <div class="container">
+                <div class="row g-4 list-item">
+                    <div class="col-3">
+                        <div class="btn-group dropend mb-2">
+                            <button type="button" id="btn-filtrar" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                Filtrar por: Todo
+                            </button>
+                            <ul class="dropdown-menu category_list">
+                                <li><a href="#" class="dropdown-item category_item" category="Todo">Todo</a></li>
                                 <c:forEach var="c" items="${categorias}">
                                 <li><a href="#" class="dropdown-item category_item" category="${c.getNombre()}">${c.getNombre()}</a></li>
                                 </c:forEach>
@@ -44,7 +45,7 @@
                             <c:if test="${sessionScope.user == 'admin'}">
                                 <li><a href="Controller?accion=mostrar" class="dropdown-item price_item" category="Todo">Esto no se ve</a></li>
                                 </c:if>
-                            <li><a href="Controller?accion=mostrar" class="dropdown-item price_item                                    
+                            <li><a href="Controller?accion=mostrar" class="dropdown-item price_item
                                    <c:if test = "${order=='todo'}">
                                        active
                                    </c:if>" 
@@ -87,7 +88,10 @@
                                     ${p.getPrecio()} &euro;
                                 </p>
                                 <c:choose>
-                                    <c:when test="${sessionScope.name != null}">                                        
+                                    <c:when test="${p.getDisponible() == 'No'}">
+                                        <button class="btn btn-danger" disabled>Producto no disponible <i class="far fa-ban"></i></button>
+                                        </c:when>
+                                        <c:when test="${sessionScope.name != null}">
                                         <a href="Carrito?accion=agregarCarrito&id=${p.getIdProducto()}" class="btn btn-primary">Agregar a Carrito <i class="fas fa-cart-plus"></i></a>
                                         </c:when>
                                         <c:otherwise>
@@ -101,62 +105,19 @@
             </div>
         </div>
 
-        <!-- Modal update -->
-        <div class="modal fade" id="update" tabindex="-1" role="dialog" aria-labelledby="updateLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="updateLabel">Actualizar moto</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form id="formUpdate" enctype="multipart/form-data" action="Save" method="post">
-                            <input type="hidden" id="idUpdate">
-                            <input type="hidden" id="action" name="action" value="update">
-                            <div class="form-group">
-                                <label for="marcaInsert">Marca:</label>
-                                <input type="text" class="form-control" id="marcaUpdate" name="marcaUpdate" aria-describedby="marcaUpdate">
-                            </div>
-                            <div class="form-group">
-                                <label for="modeloInsert">Modelo:</label>
-                                <input type="text" class="form-control" id="modeloUpdate" name="modeloUpdate" aria-describedby="modeloUpdate">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="cilindradaInsert">Cilindrada:</label>
-                                <input type="number" class="form-control" id="cilindradaUpdate" aria-describedby="cilindradaUpdate">
-                            </div>
-                            <div class="form-group">
-                                <label for="imagenInsert">Imagen:</label>
-                                <input  type="file" id="imagenUpdate" name="imagenUpdate" aria-describedby="imagenUpdate" >
-                                <img id="imgUpdate" width="100" height="100"/>
-                            </div>
-
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button id="btnUpdate" type="submit" class="btn btn-primary" data-dismiss="modal">Actualizar</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
         <script src="js/script.js"></script>
 
         <script>
-            function addMessage() {
-                document.getElementById('alert-text').innerHTML = "Para añadir al carrito, debes iniciar sesión primero";
-            }
+                                            function addMessage() {
+                                                document.getElementById('alert-text').innerHTML = "Para añadir al carrito, debes iniciar sesión primero";
+                                            }
 
-            function removeMessage() {
-                document.getElementById('alert-text').innerHTML = "";
-            }
+                                            function removeMessage() {
+                                                document.getElementById('alert-text').innerHTML = "";
+                                            }
         </script>
     </body> 
 </html>

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package daos;
 
 import Dto.Usuarios;
@@ -14,6 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaQuery;
 import utilidades.EntityManagerUtil;
 
 /**
@@ -30,6 +26,40 @@ public class UsuariosDao {
         this.emf = Persistence.createEntityManagerFactory("unidad1");
         //A partir de él, creamos el entitymanager
         this.em = emf.createEntityManager();
+    }
+
+ public void insertarUsuario(Usuarios u) {
+        try {
+            //Le decimos a la entitymanager que inicie la transacción
+            em.getTransaction().begin();
+            //Le decimos que inserte un objeto (Usuarios)
+            em.persist(u);
+            //Le pedimos a la transacción que se ejecute y complete
+            em.getTransaction().commit();
+        } finally {
+            //Cerramos la conexión
+            em.close();
+        }
+    }
+
+    public List<Usuarios> getUsuarios() {
+        try {
+            //Creamos un query a través de la entitymanager
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+            //Realizamos un query de select de la case productos (Productos.class)
+            //Lo que hace esta consulta es decirle a la query que seleccione los datos de la clase productos
+            cq.select(cq.from(Usuarios.class));
+            //Creamos el query através del criteria
+            Query q = em.createQuery(cq);
+            //Devolvemos el resultado
+            return q.getResultList();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return null;
+        }finally {
+            //Cerramos la conexión
+            em.close();
+        }
     }
 
     public Usuarios getUsuarioEmail(String email) {
@@ -64,17 +94,21 @@ public class UsuariosDao {
         }
     }
 
-    public void insertarUsuario(Usuarios u) {
+  public Usuarios getUsuarioFullName(String name, String apellidos) {
         try {
-            //Le decimos a la entitymanager que inicie la transacción
-            em.getTransaction().begin();
-            //Le decimos que inserte un objeto (Usuarios)
-            em.persist(u);
-            //Le pedimos a la transacción que se ejecute y complete
-            em.getTransaction().commit();
+            //Creamos un query para realizar la consulta que tenemos en la clase usuarios, y así darle un parametro.        
+            Query q = em.createNamedQuery("Usuarios.findByAllName");
+            //Le colocamos el parametro a esa consulta.
+            q.setParameter("nombre", name);
+            q.setParameter("apellidos", apellidos);
+            //Devolvemos el resultado
+            return (Usuarios) q.getSingleResult();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return null;
         } finally {
-            //Cerramos la conexión
             em.close();
         }
     }
+
 }

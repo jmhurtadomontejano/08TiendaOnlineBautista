@@ -67,6 +67,9 @@ public class Productos implements Serializable {
     @JoinColumn(name = "categoria", referencedColumnName = "idCategoria")
     @ManyToOne(optional = false)
     private Categorias categoria;
+    @Column(name = "disponible")
+    private String disponible;
+
 
     public Productos() {
     }
@@ -75,11 +78,13 @@ public class Productos implements Serializable {
         this.idProducto = idProducto;
     }
 
-    public Productos(Integer idProducto, String nombre, BigDecimal precio, String imagen) {
+    public Productos(Integer idProducto, String nombre, String desc, BigDecimal precio, String imagen, String disponible) {
+        this.descripcion = desc;
         this.idProducto = idProducto;
         this.nombre = nombre;
         this.precio = precio;
         this.imagen = imagen;
+        this.disponible = disponible;
     }
 
     public Integer getIdProducto() {
@@ -144,6 +149,14 @@ public class Productos implements Serializable {
             return true;
         }
         return false;
+    }
+
+    public String getDisponible() {
+        return disponible;
+    }
+
+    public void setDisponible(String disponible) {
+        this.disponible = disponible;
     }
 
     @Override

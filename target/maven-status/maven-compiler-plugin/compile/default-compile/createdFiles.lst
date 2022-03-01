@@ -15,13 +15,11 @@ Dto\DOS\DetalleventasPK_.class
 pruebas\PruebaProducto.class
 daos\UsuariosDao.class
 Dto\Carrito.class
-Cruds\Crud.class
 Dto\UNO\DetalleventasPK_.class
 utilidades\EntityManagerUtil.class
 Dto\Detalleventas.class
 Dto\DetalleventasPK.class
 Dto\UNO\Productos_.class
-.netbeans_automatic_build
 daos\ProductosDao.class
 pruebas\PruebasGlobalesVentas.class
 Dto\UNO\Usuarios_.class

@@ -76,7 +76,7 @@ public class PruebaVentas {
         detalleVentaLista.add(dv2);
 
         //añado los detalles a la nuevaVenta
-        nuevaVenta.setDetalleventasList(detalleVentaLista);
+    //    nuevaVenta.setDetalleventasList(detalleVentaLista);
  /*       if (ventDao.consultarVenta(idVentaNueva) == null) {
             em.persist(nuevaVenta);
             em.getTransaction().commit();

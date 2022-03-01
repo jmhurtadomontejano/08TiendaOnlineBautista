@@ -26,8 +26,8 @@ public class PruebaCategoriasOK {
         /*Creamos un usuario y lo igualamos al CategoriaDaoImpl con la persistencia a Unidad1*/
         CategoriasDao catDao = new CategoriasDao(/*"unidad1"*/);
         /*Insertamos un usuario a la fuerza - El email debe ser unico, sino no se registrará*/
-        Categorias u = new Categorias(59, "CategoriaPruebaJuanmi", "rutaImagen.jpg");
-     //   catDao.insertar(u);
+        Categorias c = new Categorias(59, "CategoriaPruebaJuanmi", "rutaImagen.jpg");
+        catDao.createCategoria(c);
         
         
         /*Obtenemos un listado de usuarios llamando a buscarTodos de CategoriaDAO para comprobar que se ha añadido el nuevo*/

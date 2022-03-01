@@ -95,8 +95,6 @@ public class Usuarios implements Serializable {
         this.correo = correo;
         this.claveusu = claveusu;
     }
-
-    
     
     public Usuarios(Integer idUsuario, String apellidos, String nombre, String localidad, String perfil, String correo, String claveusu) {
         this.idUsuario = idUsuario;
