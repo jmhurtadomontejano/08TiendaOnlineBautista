@@ -62,14 +62,17 @@
                     <ul class="navbar-nav">
                         <c:choose>
                             <c:when test="${sessionScope.name == null}">
+                                
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#modalRegistro">Iniciar Sesión</a>
+                                    <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#modalRegistro">Iniciar Sesión 
+                                      <i class="fas fa-users""></i> o Registrarse</a>
                                 </li>
                             </c:when>
                             <c:otherwise>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         ${sessionScope.name}
+                                        <i class="fas fa-user-check"></i>
                                     </a>
                                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                         <li><a class="dropdown-item" href="Carrito?accion=cerrar">Cerrar Sesión</a></li>

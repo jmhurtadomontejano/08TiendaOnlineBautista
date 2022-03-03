@@ -33,7 +33,7 @@
                     </div>
                 </div>
                 <div class="col-7">
-                    <input id="buscador" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <input id="buscador" class="form-control me-2" type="search" placeholder="escribe aqui los parametros de busqueda que quieras" aria-label="Search">
                 </div>
                 <div class="col">                    
                     <div class="btn-group dropstart">

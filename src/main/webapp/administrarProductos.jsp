@@ -78,27 +78,27 @@
                     </div>
                     <div class="modal-body">                        
                         <div class="tab-content" id="pills-tabContent">
-                            <!-- Formulario inicio de sesión -->
+                            <!-- Formulario registro productos-->
                             <form class="row g-3" onsubmit="return false;" id="formProducto" enctype="multipart/form-data" method="post">
                                 <input name="accion" type="hidden" id="accion">
                                 <div class="col-6">
                                     <div class="form-floating">
                                         <input type="number" class="form-control" name="floatingId" id="floatingId"
-                                               placeholder="1" required>
+                                               placeholder="idProducto" required>
                                         <label for="floatingId">idProducto</label>
                                     </div>
                                 </div>
                                 <div class="col-6">
                                     <div class="form-floating">
-                                        <input type="text" class="form-control" name="floatingName" id="floatingName"
-                                               placeholder="Vino" required>
+                                        <input type="text" class="form-control" name="floatingName" id="floatingNameProduct"
+                                               placeholder="nombre" required>
                                         <label for="floatingName">Nombre</label>
                                     </div>
                                 </div>
                                 <div class="col-6">
                                     <div class="form-floating">
                                         <input type="text" class="form-control" name="floatingDesc" id="floatingDesc"
-                                               placeholder="Del año 2010" required>
+                                               placeholder="" required>
                                         <label for="floatingDesc">Descripción</label>
                                     </div>
                                 </div>
@@ -133,8 +133,8 @@
 
                                 <div class="col-6">
                                     <div class="mb-3">
-                                        <label for="file" class="form-label">Seleccione un archivo</label>
-                                        <input class="form-control" type="file" id="file" name="file">
+                                        <label for="file" class="form-label" id="floatingImages">Seleccione un archivo</label>
+                                        <input class="form-control" type="file" id="file" name="file" for="floatingImages">
                                     </div>
                                 </div>
 

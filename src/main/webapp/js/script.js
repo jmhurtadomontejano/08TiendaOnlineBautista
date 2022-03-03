@@ -5,7 +5,6 @@ $(document).ready(function () {
 
 
     // FILTRANDO PRODUCTOS  ============================================
-
     $('.category_item').click(function () {
         var catProduct = $(this).attr('category');
         console.log(catProduct);
@@ -36,7 +35,6 @@ $(document).ready(function () {
     });
 
     // MOSTRANDO TODOS LOS PRODUCTOS =======================
-
     $('.category_item[category="Todo"]').click(function () {
         function showAll() {
             $('.product_item').show();
@@ -70,12 +68,12 @@ function sendForm() {
         contentType: false,
         cache: false,
         processData: false
-        //Si la petición fue atendida correctamente, mostrara un alerta de éxito
+                //Si la petición fue atendida correctamente, mostrara un alerta de éxito
     }).done(function () {
         swal({
             title: "Producto " + msg + " con exito",
             icon: "success"
-            //Al dar click en el botón, refrescará la vista
+                    //Al dar click en el botón, refrescará la vista
         }).then((willDelete) => {
             parent.location.href = "Controller?accion=administrar";
         });
@@ -111,8 +109,12 @@ document.addEventListener("keyup", e => {
     //Buscará el input con el id buscador
     if (e.target.matches('#buscador')) {
         //Si la tecla oprimida es escape, limpiará el buscador
-        if (e.key === "Escape")
+        if (e.key === "Escape") {
             e.target.value = "";
+            $('.product_item').each(function () {
+                $(this).show()
+            });
+        }
         //Si no es escape realizará lo siguiente
         else {
             //Recorremos todos los items con clase product.item, buscando el atributo que incluya la letra 
@@ -238,7 +240,7 @@ function eliminar(id) {
         icon: "warning",
         buttons: true,
         dangerMode: true
-        //Si realmente desea eliminarlo entraremos a este método
+                //Si realmente desea eliminarlo entraremos a este método
     }).then((willDelete) => {
         //Si desea eliminarlo realizara este procedimiento
         if (willDelete) {
@@ -249,12 +251,12 @@ function eliminar(id) {
                 type: 'GET',
                 url: url,
                 data: "idp=" + id
-                //Si la petición fue exitosa mostrara un alert confirmando
+                        //Si la petición fue exitosa mostrara un alert confirmando
             }).done(function () {
                 swal({
                     title: "Producto eliminado con exito",
                     icon: "success"
-                    //Al dar click al botón, refrescará la vista
+                            //Al dar click al botón, refrescará la vista
                 }).then((willDelete) => {
                     parent.location.href = "Controller?accion=administrar";
                 });
@@ -287,10 +289,10 @@ function loadModal(id) {
                 $("#floatingId").attr("readonly", "readonly");
                 //Cambiamos las propiedades de los input y agregamos los datos
                 document.getElementById("floatingId").value = json.idProducto;
-                document.getElementById("floatingName").value = json.nombre;
+                document.getElementById("floatingNameProduct").value = json.nombre;
                 document.getElementById("floatingDesc").value = json.descripcion;
                 document.getElementById("floatingPrice").value = json.precio;
-                
+
                 //Recorremos el select de disponibilidad
                 var selectDisp = document.getElementById("floatingDisp");
                 for (var i = 0; i < selectDisp.length; i++)

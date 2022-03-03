@@ -20,7 +20,21 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     background-size: cover;
     background-position: center;
     transition: all .1s ease-in-out;
-  
+    background-image: url('../img/fondo.jpg');
+}
+.navbar{
+    background-color: purple !important;
+}
+
+.nav-link{
+    background-color: purple !important;
+    color:pink;
+}
+
+.btn-primary:hover, .nav-link:hover{
+    background-color: pink !important;
+ 
+    color:black;
 }
 
 .banner-content{

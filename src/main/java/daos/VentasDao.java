@@ -53,9 +53,6 @@ public class VentasDao {
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return 0;
-        } finally {
-            //Cerramos la conexión
-            em.close();
         }
     }
 
@@ -69,9 +66,6 @@ public class VentasDao {
             em.getTransaction().commit();
         } catch (Exception e) {
             System.out.println(e.getMessage());
-        } finally {
-            //Cerramos la conexión
-            em.close();
         }
     }
 

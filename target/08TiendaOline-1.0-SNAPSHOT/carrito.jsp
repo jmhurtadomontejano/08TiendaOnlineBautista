@@ -51,7 +51,9 @@
                                                 ${car.getProducto().getDescripcion()}
                                                 <img src="img/${car.getProducto().getImagen()}" widht="100" height="100">
                                             </td>
-                                            <td class="text-center">€ ${car.getProducto().getPrecio()}</td>
+                                            <td class="text-center">
+                                               <fmt:formatNumber type="currency" pattern="0.00 €" value="${car.getProducto().getPrecio()}"/>
+                                           </td>
                                             <td>                                                
                                                 <div class="input-group">
                                                     <input type="hidden" value="${car.getProducto().getIdProducto()}" id="idp">
@@ -71,7 +73,7 @@
                                             </td>                                            
                                             <td class="text-center">
                                                 <!-- Le damos formato de dos decimales -->
-                                                <fmt:formatNumber type="currency" pattern="0.00" value="${car.getSubtotal()}"/>
+                                                <fmt:formatNumber type="currency" pattern="0.00 €" value="${car.getSubtotal()}"/>
                                             </td>
                                             <td class="text-center">
                                                 <button class="btn btn-danger" onclick="eliminar(${car.getProducto().getIdProducto()})" id="btn-delete"><i class="fas fa-trash-alt"></i></button>
@@ -97,7 +99,7 @@
                         <div class="card-body"> 
                             <label>Total a pagar: </label>
                             <!-- Le damos formato de dos decimales -->
-                            <input type="text" value="<fmt:formatNumber type="currency" pattern="€ 0.00" value="${sessionScope.totalPagar}"/>" readonly class="form-control" >
+                            <input type="text" value="<fmt:formatNumber type="currency" pattern="0.00 €" value="${sessionScope.totalPagar}"/>" readonly class="form-control" >
                         </div>
                         <div class="card-footer d-grid gap-2">
                             <c:choose>

@@ -6,6 +6,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -39,11 +40,10 @@
                             <!-- Recorremos la lista -->
                             <c:forEach var="v" items="${sessionScope.listaVentas}" varStatus="numero">
                                 <tr>                        
-                                    <th scope="col">${numero.count}</th>
+                                    <th scope="col">${v.getIdVenta()}</th>
                                     <td>
                                         <!-- Formateamos la fecha -->
-                                        <fmt:formatDate type="date" dateStyle = "medium"  pattern="dd 'de' MMMM 'del' yyyy" value = "${v.getFecha()}" />
-
+                                   <fmt:formatDate type="date" dateStyle = "medium"  pattern="dd 'de' MMMM 'del' yyyy" value = "${v.getFecha()}" />
                                     </td>
                                     <td>${v.getEstado()}</td>
                                     <td><button onclick="loadDetails(${v.getIdVenta()})" type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#detalleVenta">Ver Detalle <i class="far fa-search"></i></button></td>

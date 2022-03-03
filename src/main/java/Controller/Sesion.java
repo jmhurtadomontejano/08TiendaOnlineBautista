@@ -56,6 +56,9 @@ public class Sesion extends HttpServlet {
                         sesion.setAttribute("id", u.getIdUsuario());
                         sesion.setAttribute("name", u.getNombre() + " " + u.getApellidos());
                         sesion.setAttribute("role", u.getPerfil());
+//Establecemos tiempo máximo de duracion de sesion
+                        sesion.setMaxInactiveInterval(1000);
+
                         //Enviamos la respuesta
                         response.sendRedirect(url);
                     } else {
@@ -96,6 +99,7 @@ public class Sesion extends HttpServlet {
         }
     }
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+
     /**
      * Handles the HTTP <code>GET</code> method.
      *

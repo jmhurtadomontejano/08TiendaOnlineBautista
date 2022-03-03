@@ -30,19 +30,6 @@ public class ProductosDao {
         this.em = emf.createEntityManager();
     }
 
-    public void createProduct(Productos p) {
-        try {
-            //Le decimos a la entitymanager que inicie la transacción
-            em.getTransaction().begin();
-            //Le decimos que inserte un objeto (Usuarios)
-            em.persist(p);
-            //Le pedimos a la transacción que se ejecute y complete
-            em.getTransaction().commit();
-        } catch (Exception e) {
-            throw new RuntimeException(e.getMessage());
-        }
-    }
-
     public List<Productos> getProductos() {
         try {
             //Creamos un query a través de la entitymanager
@@ -50,36 +37,18 @@ public class ProductosDao {
             //Realizamos un query de select de la case productos (Productos.class)
             //Lo que hace esta consulta es decirle a la query que seleccione los datos de la clase productos
             cq.select(cq.from(Productos.class));
-            //Creamos el query
+            //Creamos el query através del criteria
             Query q = em.createQuery(cq);
             //Devolvemos el resultado
             return q.getResultList();
-        } finally {
-            //Cerramos la conexión            
-            em.close();
-        }
-    }
-
-    
-    public Productos getProductoId(int id){
-        try {
-            //Creamos un query para realizar la consulta que tenemos en la clase usuarios, y así darle un parametro.        
-            Query q = em.createNamedQuery("Productos.findByIdProducto");
-            //Le colocamos el parametro a esa consulta.
-            q.setParameter("idProducto", id);
-            //Devolvemos el resultado
-            return (Productos) q.getSingleResult();
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            //Si no existe devuelve null
             return null;
-        }finally{
-            em.close();            
         }
     }
 
-   //Método para obtener los productos ordenados por el precio menor
-    public List<Productos> getProductosLow(){
+    //Método para obtener los productos ordenados por el precio menor
+    public List<Productos> getProductosLow() {
         try {
             //Creamos un query a través de la entitymanager, de la clase Productos
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
@@ -93,14 +62,14 @@ public class ProductosDao {
             Query q = em.createQuery(cq);
             //Devolvemos el resultado
             return q.getResultList();
-        } finally {
-            //Cerramos la conexión            
-            em.close();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return null;
         }
     }
-    
-    //Método para obtener los productos ordenados por el precio menor
-    public List<Productos> getProductosHigh(){
+
+    //Método para obtener los productos ordenados por el precio mayor
+    public List<Productos> getProductosHigh() {
         try {
             //Creamos un query a través de la entitymanager, de la clase Productos
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
@@ -114,22 +83,24 @@ public class ProductosDao {
             Query q = em.createQuery(cq);
             //Devolvemos el resultado
             return q.getResultList();
-        } finally {
-            //Cerramos la conexión            
-            em.close();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return null;
         }
     }
 
-    public void updateProduct(Productos p) {
+    public Productos getProductoId(int id) {
         try {
-            //Iniciamos el proceso de transacción
-            em.getTransaction().begin();
-            //Realizamos la actualización
-            em.merge(p);
-            //Guardamos cambios
-            em.getTransaction().commit();
+            //Creamos un query para realizar la consulta que tenemos en la clase usuarios, y así darle un parametro.        
+            Query q = em.createNamedQuery("Productos.findByIdProducto");
+            //Le colocamos el parametro a esa consulta.
+            q.setParameter("idProducto", id);
+            //Devolvemos el resultado
+            return (Productos) q.getSingleResult();
         } catch (Exception e) {
-            throw new RuntimeException(e.getMessage());
+            System.out.println(e.getMessage());
+            //Si no existe retornamos null
+            return null;
         }
     }
 
@@ -150,6 +121,30 @@ public class ProductosDao {
         }
     }
 
+    public void updateProduct(Productos p) {
+        try {
+            //Iniciamos el proceso de transacción
+            em.getTransaction().begin();
+            //Realizamos la actualización
+            em.merge(p);
+            //Guardamos cambios
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage());
+        }
+    }
 
+    public void createProduct(Productos p) {
+        try {
+            //Le decimos a la entitymanager que inicie la transacción
+            em.getTransaction().begin();
+            //Le decimos que inserte un objeto (Usuarios)
+            em.persist(p);
+            //Le pedimos a la transacción que se ejecute y complete
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage());
+        }
+    }
 
 }

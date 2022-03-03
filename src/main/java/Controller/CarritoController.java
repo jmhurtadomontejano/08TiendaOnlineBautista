@@ -54,7 +54,7 @@ public class CarritoController extends HttpServlet {
         HttpSession sesion = request.getSession();
         switch (accion) {
             case "agregarCarrito":
-                //Seteamos la cantidad en 1 siempre que entre a este método.
+                //Ponemos la cantidad en 1 siempre que entre a este método.
                 cantidad = 1;
                 //Variable para saber si encontro el producto.
                 boolean pos = false;
@@ -191,7 +191,7 @@ public class CarritoController extends HttpServlet {
                 //Insertamos y obtenemos el id
                 int idVenta = vdao.createVenta(v);
                 //Recorremos la lista del carrito para insertar los detalle ventas
-                for(Carrito c: listaCarrito){
+                for (Carrito c : listaCarrito) {
                     //Obtenemos el producto
                     p = c.getProducto();
                     //Creamos las llaves primarias
@@ -200,7 +200,7 @@ public class CarritoController extends HttpServlet {
                     Detalleventas detalle = new Detalleventas(pk, new BigDecimal(c.getSubtotal()), c.getCantidad());
                     //Insertamos el detalle a la base de datos
                     vdao.createDetalle(detalle);
-                }                
+                }
                 //Redireccionamos a factura
                 response.sendRedirect("factura.jsp");
                 break;
