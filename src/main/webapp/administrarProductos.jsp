@@ -78,7 +78,7 @@
                     </div>
                     <div class="modal-body">                        
                         <div class="tab-content" id="pills-tabContent">
-                            <!-- Formulario registro productos-->
+                            <!-- Formulario inicio de sesión -->
                             <form class="row g-3" onsubmit="return false;" id="formProducto" enctype="multipart/form-data" method="post">
                                 <input name="accion" type="hidden" id="accion">
                                 <div class="col-6">
@@ -133,8 +133,8 @@
 
                                 <div class="col-6">
                                     <div class="mb-3">
-                                        <label for="file" class="form-label" id="floatingImages">Seleccione un archivo</label>
-                                        <input class="form-control" type="file" id="file" name="file" for="floatingImages">
+                                        <label for="file" class="form-label">Seleccione un archivo</label>
+                                        <input class="form-control" type="file" id="file" name="file">
                                     </div>
                                 </div>
 

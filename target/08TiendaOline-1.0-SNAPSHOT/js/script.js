@@ -235,7 +235,7 @@ function loadDetails(id) {
 function eliminar(id) {
     //Creamos una alerta de confirmación antes de eliminar
     swal({
-        title: "Esta seguro de eliminar?",
+        title: "Esta seguro de eliminar el producto?",
         text: "Una vez eliminado, este producto desaparecera del catalogo",
         icon: "warning",
         buttons: true,
@@ -292,6 +292,7 @@ function loadModal(id) {
                 document.getElementById("floatingNameProduct").value = json.nombre;
                 document.getElementById("floatingDesc").value = json.descripcion;
                 document.getElementById("floatingPrice").value = json.precio;
+                document.getElementById("floatingImage").value = json.imagen;
 
                 //Recorremos el select de disponibilidad
                 var selectDisp = document.getElementById("floatingDisp");
