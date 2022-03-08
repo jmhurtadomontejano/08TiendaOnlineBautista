@@ -51,8 +51,6 @@ public class Categorias implements Serializable {
     @Size(min = 1, max = 50)
     @Column(name = "imagen")
     private String imagen;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "categoria")
-    private List<Productos> productoList;
 
     public Categorias() {
     }
@@ -90,16 +88,7 @@ public class Categorias implements Serializable {
     public void setImagen(String imagen) {
         this.imagen = imagen;
     }
-
-    @XmlTransient
-    public List<Productos> getProductoList() {
-        return productoList;
-    }
-
-    public void setProductoList(List<Productos> productoList) {
-        this.productoList = productoList;
-    }
-
+    
     @Override
     public int hashCode() {
         int hash = 0;
@@ -122,7 +111,7 @@ public class Categorias implements Serializable {
 
     @Override
     public String toString() {
-        return "Categoria{" + "idCategoria=" + idCategoria + ", nombre=" + nombre + ", imagen=" + imagen + ", productoList=" + productoList + '}';
+        return "Categoria{" + "idCategoria=" + idCategoria + ", nombre=" + nombre + ", imagen=" + imagen + '}';
     }
     
 }

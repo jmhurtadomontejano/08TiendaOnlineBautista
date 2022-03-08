@@ -1,6 +1,8 @@
+Modelo\GenericResource.class
 Dto\DOS\Detalleventas_.class
 Dto\DOS\Usuarios_.class
 Dto\UNO\Detalleventas_.class
+Modelo\ApplicationConfig.class
 Dto\DOS\Categorias_.class
 Controller\Controller.class
 Dto\Ventas.class

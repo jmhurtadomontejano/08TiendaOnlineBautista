@@ -156,7 +156,7 @@ function imprimir() {
 //Funcion para cargar los detalles de los productos, y su respectiva tabla
 function loadDetails(id) {
     let tabla = document.getElementsByClassName("table")[1];
-    fetch('http://localhost:8080/Carrito_Compras/webresources/generic/detalleVentas/' + id)
+    fetch('http://localhost:8080/08TiendaOline/webresources/generic/detalleVentas/' + id)
             .then(response => response.json())
             .then(json => {
                 //Remover la tabla para insertar una nueva
@@ -277,7 +277,7 @@ function eliminar(id) {
 //Función para cargar el modal con sus datos
 function loadModal(id) {
     //Hacemos un llamado al fetch para buscar los datos
-    fetch('http://localhost:8080/Carrito_Compras/webresources/generic/producto/' + id)
+    fetch('http://localhost:8080/08TiendaOline/webresources/generic/producto/' + id)
             .then(response => response.json())
             .then(json => {
                 //Obtenemos el titulo del modal y lo cambiamos
@@ -292,7 +292,6 @@ function loadModal(id) {
                 document.getElementById("floatingNameProduct").value = json.nombre;
                 document.getElementById("floatingDesc").value = json.descripcion;
                 document.getElementById("floatingPrice").value = json.precio;
-                document.getElementById("floatingImage").value = json.imagen;
 
                 //Recorremos el select de disponibilidad
                 var selectDisp = document.getElementById("floatingDisp");
@@ -340,7 +339,7 @@ function loadCreate() {
 //Función para abrir modal para editar ventas
 function loadModalVenta(id) {
     //Realizamos un fetch a la url para obtener los datos de la base de datos
-    fetch('http://localhost:8080/Carrito_Compras/webresources/generic/ventas/' + id)
+    fetch('http://localhost:8080/08TiendaOline/webresources/generic/ventas/' + id)
             .then(response => response.json())
             .then(json => {
                 //Obtenemos los campos, y le damos los valores al html
